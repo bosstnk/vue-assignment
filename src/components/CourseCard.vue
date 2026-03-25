@@ -1,9 +1,11 @@
 <template>
   <div class="course-list">
     <div class="course-card">
-      <h3>ชื่อคอร์ส: ...</h3>
-      <p>ราคา: ... บาท</p>
-      <button>เพิ่มในรายการโปรด</button>
+      <h3>{{ course.title }}</h3>
+      <p> {{course.price}} </p>
+      <button :disabled="!store.username" @click="store.addFavorite(course)">
+        เพิ่มในรายการโปรด
+      </button>
     </div>
   </div>
 </template>
@@ -11,6 +13,10 @@
 <script setup>
 // TODO: import { useFavoriteStore } แล้วเขียนฟังก์ชันเพิ่มคอร์สลง store
 // TODO: defineProps({ course: Object })
+import { useFavoriteStore } from "../stores/favorite";
+const { course } = defineProps(["course"]);
+const store = useFavoriteStore();
+
 </script>
 
 <style scoped>
@@ -31,6 +37,7 @@
   border-radius: 8px;
   background: #fafafa;
   padding: 12px 16px;
+  color: black;
 }
 
 h3 {
